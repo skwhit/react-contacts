@@ -1,3 +1,13 @@
+// import {styledContactCard} from "./Contact.styles"
+
+// import React from "react"
+// import styled from 'styled-components';
+// import {css} from 'styled-components';
+
+// const styledContactCard = styled.div`
+// border: none;
+// `
+
 const ContactCard = ({ firstName='', lastName='', phoneNumber='', profilePic='' }) => {
     return (
         <div>
