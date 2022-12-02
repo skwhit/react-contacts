@@ -1,101 +1,108 @@
-import React from "react";
+import React, { useState } from "react";
+// import useFormState from "../../hooks/useFormState";
+import createForm from "./CreateForm.module.css"
 
-class ContactCreateForm extends React.Component {
-    
-    constructor(props) {
-        super(props);
+const ContactCreateForm = () => {
 
-        this.state = {
-            firstName: '',
-            lastName: '',
-            phoneNumber: '',
-            email: '',
-            address: '',
-            profilePic: '',
-        };
+  const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
+    profilePic: ""
+  });
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    }
+  const handleChange = (e) => {
+    setState((state) => ({ ...state, [e.target.name]: e.target.value }));
+  };
 
-    handleInputChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  console.log(state.profilePic)
 
-    handleFormSubmit(event) {
-        event.preventDefault();
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.handleFormSubmit}>
-                <div>
-                    <img src={this.state.profilePic} alt="Profile preview." />
-                </div>
-                <div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="First Name"
-                            name="firstName"
-                            value={this.state.firstName}
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Last Name"
-                            name="lastName"
-                            value={this.state.lastName}
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="tel"
-                            placeholder="Phone Number"
-                            name="phoneNumber"
-                            value={this.state.phoneNumber}
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Address"
-                            name="address"
-                            value={this.state.address}
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Profile Picture Url"
-                            name="profilePic"
-                            value={this.state.profilePic}
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <button type="submit">Add Contact</button>
-                    </div>
-                </div>
-            </form>
-        )
-    }
-}
+  return (
+    <form className="container-fluid d-flex justify-content-center gap-5 py-5 bg-lightgrey" onSubmit={handleSubmit}>
+      <div className={createForm.imgContainer}>
+        {
+          (!state.profilePic.length ? (
+            <img className={createForm.img}
+              src="https://t3.ftcdn.net/jpg/03/42/99/68/360_F_342996846_tHMepJOsXWwbvMpG7uiYpE68wbfQ9e4s.jpg"
+              alt="Profile preview."
+            />
+          ) : (
+            <img className={createForm.img} src={state.profilePic} alt="Profile preview." />
+          ))
+        }
+      </div>
+      <div className="w-50 d-flex flex-column justify-content-center gap-3">
+        <div>
+          <input
+            className={createForm.input}
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            value={state.firstName}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={createForm.input}
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            value={state.lastName}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={createForm.input}
+            type="tel"
+            placeholder="Phone Number"
+            name="phoneNumber"
+            value={state.phoneNumber}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={createForm.input}
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={state.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={createForm.input}
+            type="text"
+            placeholder="Address"
+            name="address"
+            value={state.address}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            className={createForm.input}
+            type="text"
+            placeholder="Profile Picture Url"
+            name="profilePic"
+            value={state.profilePic}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="d-flex justify-content-left">
+          <button  className="btn bg-secondary text-white shadow-lg" type="submit">Add Contact</button>
+        </div>
+      </div>
+    </form>
+  );
+};
 
 export default ContactCreateForm;

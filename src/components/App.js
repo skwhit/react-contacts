@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import LoginPage from "./login"
 import RegisterPage from "./register";
 import ContactsPage from "./contacts";
@@ -47,35 +47,25 @@ const mockContacts = [
 ];
 
 
-class App extends React.Component {
+  function App(props) {
 
-  constructor(props) {
-    super(props);
+  const [contacts, setContacts] = useState([]);
 
-    this.state = {
-      contacts: []
-    }
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const storedContacts = getContacts();
+    setContacts(storedContacts.length ? storedContacts : mockContacts)
+  }, [])
 
-    this.setState({
-      contacts: storedContacts.length ? storedContacts : mockContacts
-    })
-  }
-
-  render() {
     return (
       <div>
         <LoginPage />
         <RegisterPage />
-        <ContactsPage contacts={this.state.contacts} />
-        <ContactDetailsPage contact={this.state.contacts[0]} />
+        <ContactsPage contacts={contacts} />
+        <ContactDetailsPage contact={contacts[0]} />
         <ContactCreatePage />
       </div>
     );
   }
-}
+
 
 export default App;
