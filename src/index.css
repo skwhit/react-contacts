@@ -15,3 +15,20 @@ body {
   .bg-lightgrey {
     background: rgb(186, 184, 184);
   }
+
+  .border-test {
+    border: 2px solid black;
+  }
+
+  .rounded-responsive {
+    border-radius: 50%;
+    width: 100%;
+  }
+
+  .text-indent {
+    text-indent: 20px;
+  }
+
+  .mw-500 {
+    max-width: 500px;
+  }

@@ -4,8 +4,8 @@ const RegisterPage = (props) => {
     return (
         <div>
             <RegisterForm />
-            <div>
-                <p>Already have an account? <a href="/login">Login</a>.</p>
+            <div className="text-center">
+                <p>Already have an account? <a className="text-decoration-none fw-bold" href="/login">Login</a>.</p>
             </div>
         </div>
     )

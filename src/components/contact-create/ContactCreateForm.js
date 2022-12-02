@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 // import useFormState from "../../hooks/useFormState";
 import createForm from "./CreateForm.module.css"
+import { UserContext } from "../../hooks/userContext";
 
 const ContactCreateForm = () => {
+
+  const {contacts, setContacts} = useContext(UserContext)
 
   const [state, setState] = useState({
     firstName: "",
@@ -36,8 +39,8 @@ const ContactCreateForm = () => {
           ))
         }
       </div>
-      <div className="w-50 d-flex flex-column justify-content-center gap-3">
-        <div>
+      <div className="w-50 d-flex flex-column gap-3 mw-500">
+        <div className="w-100">
           <input
             className={createForm.input}
             type="text"
@@ -47,7 +50,7 @@ const ContactCreateForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="w-100">
           <input
             className={createForm.input}
             type="text"
@@ -57,7 +60,7 @@ const ContactCreateForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="w-100">
           <input
             className={createForm.input}
             type="tel"
@@ -67,7 +70,7 @@ const ContactCreateForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="w-100">
           <input
             className={createForm.input}
             type="email"
@@ -77,7 +80,7 @@ const ContactCreateForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="w-100">
           <input
             className={createForm.input}
             type="text"
@@ -87,7 +90,7 @@ const ContactCreateForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="w-100">
           <input
             className={createForm.input}
             type="text"
@@ -98,7 +101,7 @@ const ContactCreateForm = () => {
           />
         </div>
         <div className="d-flex justify-content-left">
-          <button  className="btn bg-secondary text-white shadow-lg" type="submit">Add Contact</button>
+          <button  className="btn btn-secondary" type="submit">Add Contact</button>
         </div>
       </div>
     </form>

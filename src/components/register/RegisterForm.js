@@ -1,4 +1,5 @@
 import React from 'react';
+import register from './Register.module.css'
 
 class RegisterForm extends React.Component {
 
@@ -27,10 +28,11 @@ class RegisterForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleFormSubmit}>
-                <div>
-                    <label htmlFor="username">Username</label>
+            <form className="d-flex flex-column align-items-center p-4 gap-2" onSubmit={this.handleFormSubmit}>
+                <div className={register.inputContainer}>
+                    <label htmlFor="username"></label>
                     <input 
+                        className={register.input}
                         id="username"
                         name="username"
                         type="text" 
@@ -39,9 +41,10 @@ class RegisterForm extends React.Component {
                         onChange={this.handleInputChange}
                     />
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
+                <div className={register.inputContainer}>
+                    <label htmlFor="password"></label>
                     <input 
+                        className={register.input}
                         id="password"
                         name="password"
                         type="password" 
@@ -51,7 +54,7 @@ class RegisterForm extends React.Component {
                     />
                 </div>
                 <div>
-                    <button type="submit">Login</button>
+                    <button className='btn btn-secondary' type="submit">Login</button>
                 </div>
             </form>
         )

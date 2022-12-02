@@ -1,4 +1,5 @@
 import React from 'react';
+import login from "./Login.module.css"
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -25,10 +26,11 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleFormSubmit}>
-                <div>
-                    <label htmlFor="username">Username</label>
+            <form className="d-flex flex-column align-items-center p-4 gap-2" onSubmit={this.handleFormSubmit}>
+                <div className={login.inputContainer}>
+                    <label htmlFor="username"></label>
                     <input 
+                        className={login.input}
                         id="username"
                         name="username"
                         type="text" 
@@ -37,9 +39,10 @@ class LoginForm extends React.Component {
                         onChange={this.handleInputChange}
                     />
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
+                <div className={login.inputContainer}>
+                    <label htmlFor="password"></label>
                     <input 
+                        className={login.input}
                         id="password"
                         name="password"
                         type="password" 
@@ -49,7 +52,7 @@ class LoginForm extends React.Component {
                     />
                 </div>
                 <div>
-                    <button type="submit">Login</button>
+                    <button className="btn btn-secondary" type="submit">Login</button>
                 </div>
             </form>
         )

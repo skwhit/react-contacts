@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import LoginPage from "./login"
 import RegisterPage from "./register";
 import ContactsPage from "./contacts";
@@ -6,6 +6,7 @@ import ContactDetailsPage from "./contact-details";
 import ContactCreatePage from "./contact-create";
 import { getContacts } from "../utils/contacts";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserContext } from "../hooks/userContext";
 
 const mockContacts = [
   {
@@ -51,18 +52,22 @@ const mockContacts = [
 
   const [contacts, setContacts] = useState([]);
 
+  const providerContacts = useMemo(() => ({contacts, setContacts}), [contacts, setContacts])
+
   useEffect(() => {
     const storedContacts = getContacts();
     setContacts(storedContacts.length ? storedContacts : mockContacts)
-  }, [])
+  }, [contacts])
 
     return (
       <div>
         <LoginPage />
         <RegisterPage />
-        <ContactsPage contacts={contacts} />
-        <ContactDetailsPage contact={contacts[0]} />
-        <ContactCreatePage />
+        <UserContext.Provider value={providerContacts}>
+          <ContactsPage contacts={contacts} />
+          <ContactDetailsPage contact={contacts[0]} />
+          <ContactCreatePage />
+        </UserContext.Provider>
       </div>
     );
   }
