@@ -5,6 +5,7 @@ import ContactsPage from "./contacts";
 import ContactDetailsPage from "./contact-details";
 import ContactCreatePage from "./contact-create";
 import { getContacts } from "../utils/contacts";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const mockContacts = [
   {
