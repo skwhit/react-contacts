@@ -57,7 +57,8 @@ const mockContacts = [
   useEffect(() => {
     const storedContacts = getContacts();
     setContacts(storedContacts.length ? storedContacts : mockContacts)
-  }, [contacts])
+    console.log(contacts)
+  }, [])
 
     return (
       <div>

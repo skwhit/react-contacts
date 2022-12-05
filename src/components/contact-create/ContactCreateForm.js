@@ -1,20 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 // import useFormState from "../../hooks/useFormState";
 import createForm from "./CreateForm.module.css"
 import { UserContext } from "../../hooks/userContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const ContactCreateForm = () => {
 
   const {contacts, setContacts} = useContext(UserContext)
 
-  const [state, setState] = useState({
+  const initialState = {
     firstName: "",
     lastName: "",
     phoneNumber: "",
     email: "",
     address: "",
     profilePic: ""
-  });
+  }
+
+  const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    console.log(state)
+  }, [state])
 
   const handleChange = (e) => {
     setState((state) => ({ ...state, [e.target.name]: e.target.value }));
@@ -22,8 +29,10 @@ const ContactCreateForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e);
+    setContacts([(contacts) => contacts.push(state)])
+    setState(initialState)
   };
-  console.log(state.profilePic)
 
   return (
     <form className="container-fluid d-flex justify-content-center gap-5 py-5 bg-lightgrey" onSubmit={handleSubmit}>
