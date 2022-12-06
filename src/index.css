@@ -1,34 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.bg-lightgrey {
+  background: rgb(186, 184, 184);
+}
+
+.border-test {
+  border: 2px solid black;
+}
+
+.rounded-responsive {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.text-indent {
+  text-indent: 20px;
+}
+
+.mw-500 {
+  max-width: 500px;
+}
+
+.contacts-container {
+  display: flex;
+}
+
+.contactCreate,
+.contactPage {
+  display: flex;
+  width: 50%;
+}
+
+@media (max-width: 800px) {
+  .contacts-container {
+    display: block;
   }
 
-  .bg-lightgrey {
-    background: rgb(186, 184, 184);
-  }
-
-  .border-test {
-    border: 2px solid black;
-  }
-
-  .rounded-responsive {
-    border-radius: 50%;
+  .contactCreate,
+  .contactPage {
     width: 100%;
   }
-
-  .text-indent {
-    text-indent: 20px;
-  }
-
-  .mw-500 {
-    max-width: 500px;
-  }
+}

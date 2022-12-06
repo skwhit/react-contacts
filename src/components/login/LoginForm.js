@@ -1,62 +1,68 @@
-import React from 'react';
-import login from "./Login.module.css"
+import React, { useState, useContext } from "react";
+import login from "./Login.module.css";
+import { AuthContext } from "../../hooks/authContext";
 
-class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            password: '',
-        };
+const LoginForm = () => {
+  const initialState = {
+    username: "",
+    password: "",
+  };
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  const [state, setState] = useState(initialState);
+
+  const { userLogin, setUserLogin } = useContext(AuthContext);
+
+  const handleInputChange = (e) => {
+    setState((state) => ({ ...state, [e.target.name]: e.target.value }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!state.username.length) {
+      alert("Please enter a valid username");
+    } else if (!state.password.length) {
+      alert("Please enter a valid password");
+    } else {
+      setUserLogin(state);
     }
+  };
 
-    handleInputChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    handleFormSubmit(event) {
-        event.preventDefault();
-        
-    }
-
-    render() {
-        return (
-            <form className="d-flex flex-column align-items-center p-4 gap-2" onSubmit={this.handleFormSubmit}>
-                <div className={login.inputContainer}>
-                    <label htmlFor="username"></label>
-                    <input 
-                        className={login.input}
-                        id="username"
-                        name="username"
-                        type="text" 
-                        placeholder="Username"  
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                    />
-                </div>
-                <div className={login.inputContainer}>
-                    <label htmlFor="password"></label>
-                    <input 
-                        className={login.input}
-                        id="password"
-                        name="password"
-                        type="password" 
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                    />
-                </div>
-                <div>
-                    <button className="btn btn-secondary" type="submit">Login</button>
-                </div>
-            </form>
-        )
-    }
-}
+  return (
+    <form
+      className="d-flex flex-column align-items-center p-4 gap-2"
+      onSubmit={handleFormSubmit}
+    >
+      <div className={login.inputContainer}>
+        <label htmlFor="username"></label>
+        <input
+          className={login.input}
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          value={state.username}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className={login.inputContainer}>
+        <label htmlFor="password"></label>
+        <input
+          className={login.input}
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={state.password}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <button className="btn btn-secondary" type="submit">
+          Login
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default LoginForm;

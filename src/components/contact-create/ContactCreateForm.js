@@ -1,27 +1,27 @@
 import React, { useState, useContext, useEffect } from "react";
 // import useFormState from "../../hooks/useFormState";
-import createForm from "./CreateForm.module.css"
+import createForm from "./CreateForm.module.css";
 import { UserContext } from "../../hooks/userContext";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const ContactCreateForm = () => {
-
-  const {contacts, setContacts} = useContext(UserContext)
+  const { contacts, setContacts } = useContext(UserContext);
 
   const initialState = {
+    id: uuidv4(),
     firstName: "",
     lastName: "",
     phoneNumber: "",
     email: "",
     address: "",
-    profilePic: ""
-  }
+    profilePic: "",
+  };
 
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
-    console.log(state)
-  }, [state])
+    console.log(state);
+  }, [state]);
 
   const handleChange = (e) => {
     setState((state) => ({ ...state, [e.target.name]: e.target.value }));
@@ -30,23 +30,29 @@ const ContactCreateForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-    setContacts([(contacts) => contacts.push(state)])
-    setState(initialState)
+    setContacts([...contacts, state]);
+    setState(initialState);
   };
 
   return (
-    <form className="container-fluid d-flex justify-content-center gap-5 py-5 bg-lightgrey" onSubmit={handleSubmit}>
+    <form
+      className="container-fluid d-flex justify-content-center gap-5 py-5"
+      onSubmit={handleSubmit}
+    >
       <div className={createForm.imgContainer}>
-        {
-          (!state.profilePic.length ? (
-            <img className={createForm.img}
-              src="https://t3.ftcdn.net/jpg/03/42/99/68/360_F_342996846_tHMepJOsXWwbvMpG7uiYpE68wbfQ9e4s.jpg"
-              alt="Profile preview."
-            />
-          ) : (
-            <img className={createForm.img} src={state.profilePic} alt="Profile preview." />
-          ))
-        }
+        {!state.profilePic.length ? (
+          <img
+            className={createForm.img}
+            src="https://t3.ftcdn.net/jpg/03/42/99/68/360_F_342996846_tHMepJOsXWwbvMpG7uiYpE68wbfQ9e4s.jpg"
+            alt="Profile preview."
+          />
+        ) : (
+          <img
+            className={createForm.img}
+            src={state.profilePic}
+            alt="Profile preview."
+          />
+        )}
       </div>
       <div className="w-50 d-flex flex-column gap-3 mw-500">
         <div className="w-100">
@@ -110,7 +116,9 @@ const ContactCreateForm = () => {
           />
         </div>
         <div className="d-flex justify-content-left">
-          <button  className="btn btn-secondary" type="submit">Add Contact</button>
+          <button className="btn btn-secondary" type="submit">
+            Add Contact
+          </button>
         </div>
       </div>
     </form>

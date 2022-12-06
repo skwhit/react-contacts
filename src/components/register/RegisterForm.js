@@ -1,64 +1,69 @@
-import React from 'react';
-import register from './Register.module.css'
+import React, { useContext, useState } from "react";
+import register from "./Register.module.css";
+import { AuthContext } from "../../hooks/authContext";
 
-class RegisterForm extends React.Component {
+const RegisterForm = () => {
+  const initialState = {
+    username: "",
+    password: "",
+  };
 
-    constructor(props) {
-        super(props);
+  const [state, setState] = useState(initialState);
 
-        this.state = {
-            username: '',
-            password: '',
-        }
+  const { userLogin, setUserLogin } = useContext(AuthContext);
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  const handleInputChange = (e) => {
+    setState((state) => ({ ...state, [e.target.name]: e.target.value }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log("hey");
+    if (!state.username.length) {
+      alert("Please enter a valid username");
+    } else if (!state.password.length) {
+      alert("Please enter a valid password");
+    } else {
+      setUserLogin(state);
     }
+  };
 
-    handleInputChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    handleFormSubmit(event) {
-        event.preventDefault();
-        
-    }
-
-    render() {
-        return (
-            <form className="d-flex flex-column align-items-center p-4 gap-2" onSubmit={this.handleFormSubmit}>
-                <div className={register.inputContainer}>
-                    <label htmlFor="username"></label>
-                    <input 
-                        className={register.input}
-                        id="username"
-                        name="username"
-                        type="text" 
-                        placeholder="Username"  
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                    />
-                </div>
-                <div className={register.inputContainer}>
-                    <label htmlFor="password"></label>
-                    <input 
-                        className={register.input}
-                        id="password"
-                        name="password"
-                        type="password" 
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                    />
-                </div>
-                <div>
-                    <button className='btn btn-secondary' type="submit">Login</button>
-                </div>
-            </form>
-        )
-    }
-}
+  return (
+    <form
+      className="d-flex flex-column align-items-center p-4 gap-2"
+      onSubmit={handleFormSubmit}
+    >
+      <div className={register.inputContainer}>
+        <label htmlFor="username"></label>
+        <input
+          className={register.input}
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          value={state.username}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className={register.inputContainer}>
+        <label htmlFor="password"></label>
+        <input
+          className={register.input}
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={state.password}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <button className="btn btn-secondary" type="submit">
+          Login
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default RegisterForm;
